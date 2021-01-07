@@ -20,8 +20,8 @@ public class MyLinkedList{
       size += 1;
       return true;
     }
-    newFinal.setPrev(newFinal);
-    newFinal.setNext(newFinal);
+    newFinal.setPrev(null);
+    newFinal.setNext(null);
     end = newFinal;
     start = newFinal;
     size += 1;
@@ -56,12 +56,15 @@ public class MyLinkedList{
   public String get (int index) {
     int counter = 0;
     Node nodeTrack = start;
+    if (index >= size()) {
+      throw new IndexOutOfBoundsException ("no");
+    }
     for (int i = 0; i < size(); i++) {
       if (index != counter) {
         nodeTrack = nodeTrack.getNext();
         counter += 1;
       } else {
-        i = size();
+        i += size();
       }
     }
     return nodeTrack.getData();
@@ -70,7 +73,7 @@ public class MyLinkedList{
   public String set(int index, String value) {
     int counter = 0;
     Node nodeTrack = start;
-    Node nodeOld;
+    String dataOld;
     for (int i = 0; i < size(); i++) {
       if (index != counter) {
         nodeTrack = nodeTrack.getNext();
@@ -79,9 +82,9 @@ public class MyLinkedList{
         i = size();
       }
     }
-    nodeOld = nodeTrack;
+    dataOld = nodeTrack.getData();
     nodeTrack.setData(value);
-    return nodeOld.getData();
+    return dataOld;
   }
 
   public String toString() {
