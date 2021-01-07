@@ -34,23 +34,31 @@ public class MyLinkedList{
     int counter = 0;
     if (index == size()) {
       add(value);
-      System.out.println(toString());
-    }
-    for (int i = 0; i < size() - 1; i++) {
-      if (counter == index) {
-        newNode.setPrev(next);
-        newNode.setNext(next.getNext());
-        next.setNext(newNode);
-        next = newNode.getNext();
-        next.setPrev(newNode);
-        i = size();
-        System.out.println(toString());
+    } else {
+      if (index == 0) {
+        start.setPrev(newNode);
+        newNode.setNext(start);
+        newNode.setPrev(null);
+        start = newNode;
+        size += 1;
       } else {
-        next = next.getNext();
-        counter += 1;
+        for (int i = 0; i < size() - 1; i++) {
+          if (counter == index) {
+            next = next.getPrev();
+            newNode.setPrev(next);
+            newNode.setNext(next.getNext());
+            next.setNext(newNode);
+            next = newNode.getNext();
+            next.setPrev(newNode);
+            i = size();
+          } else {
+            next = next.getNext();
+            counter += 1;
+          }
+        }
+        size += 1;
       }
     }
-    size += 1;
   }
 
   public String get (int index) {
