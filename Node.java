@@ -18,15 +18,21 @@ public class Node {
     return prev;
   }
 
-  public void setData (String newData) {
+  public String setData (String newData) {
+    String a = data;
     data = newData;
+    return a;
   }
 
-  public void setNext (String newNext) {
+  public Node setNext (Node newNext) {
+    Node a = next;
     data = newNext;
+    return a;
   }
 
-  public void setPrev (String newPrev) {
+  public Node setPrev (Node newPrev) {
+    Node a = prev;
     data = newPrev;
+    return a;
   }
 }
