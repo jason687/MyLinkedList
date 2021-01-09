@@ -26,13 +26,13 @@ public class Node {
 
   public Node setNext (Node newNext) {
     Node a = next;
-    data = newNext;
+    next = newNext;
     return a;
   }
 
   public Node setPrev (Node newPrev) {
     Node a = prev;
-    data = newPrev;
+    prev = newPrev;
     return a;
   }
 }
