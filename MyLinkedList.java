@@ -178,4 +178,14 @@ public class MyLinkedList{
     }
     return toString();
   }
+
+  public void extend (MyLinkedList a) {
+    end.setNext(a.start);
+    a.start.setPrev(end);
+    size += a.size();
+    int aSize = a.size();
+    for (int i = 0; i < aSize; i++) {
+      a.remove(0);
+    }
+  }
 }
