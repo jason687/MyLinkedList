@@ -12,8 +12,6 @@ public class MyLinkedList{
 
   public boolean add (String value) {
     Node newFinal = new Node (value);
-    System.out.println(value);
-    System.out.println(size());
     if (size() > 0) {
       end.setNext(newFinal);
       newFinal.setPrev(end);
@@ -26,7 +24,6 @@ public class MyLinkedList{
       start = newFinal;
       size += 1;
     }
-    System.out.println(size());
     return true;
   }
 
@@ -34,8 +31,6 @@ public class MyLinkedList{
     Node newNode = new Node (value);
     Node next = start;
     int counter = 0;
-    System.out.println(value);
-    System.out.println(size());
     if (index < 0 || index > size()) {
       throw new IndexOutOfBoundsException ("no");
     } else {
@@ -67,7 +62,6 @@ public class MyLinkedList{
         }
       }
     }
-    System.out.println(size());
   }
 
   public String get (int index) {
@@ -78,7 +72,6 @@ public class MyLinkedList{
     for (int i = 0; i < size(); i++) {
       if (index == i) {
         i += size();
-        System.out.println(nodeTrack.getData());
       } else {
         nodeTrack = nodeTrack.getNext();
       }
@@ -109,9 +102,9 @@ public class MyLinkedList{
       return "[]";
     }
     for (int i = 0; i < size(); i++) {
+
       outputStuff += get(i);
       outputStuff += ", ";
-      System.out.println(outputStuff);
     }
     if (outputStuff.length() < 2) {
       return "[]";
@@ -129,7 +122,6 @@ public class MyLinkedList{
     for (int i = size() - 1; i >= 0; i--) {
       outputStuff += get(i);
       outputStuff += ", ";
-      System.out.println(outputStuff);
     }
     if (outputStuff.length() < 2) {
       return "[]";
@@ -139,4 +131,51 @@ public class MyLinkedList{
     return outputStuff;
   }
 
+  public String remove (int index) {
+    Node tempNodeBefore;
+    Node tempNodeAfter;
+    Node tempNode;
+    if (size() == 0) {
+      throw new IndexOutOfBoundsException ("can't delete anything when there is nothing");
+    }
+    if (index >= size() || index < 0) {
+      throw new IndexOutOfBoundsException ("no");
+    }
+    if (size() == 1) {
+      start = null;
+      end = null;
+      size = 0;
+      return "[]";
+    }
+    if (index == 0) {
+      tempNode = start.getNext();
+      tempNode.setPrev(null);
+      start = tempNode;
+      size -= 1;
+      return toString();
+    }
+    if (index == size() - 1) {
+      tempNode = end.getPrev();
+      tempNode.setNext(null);
+      end = tempNode;
+      size -= 1;
+      return toString();
+    }
+    tempNode = start;
+    for (int i = 0; i < size(); i++) {
+      if (i == index) {
+        tempNodeBefore = tempNode.getPrev();
+        tempNodeAfter = tempNode.getNext();
+        tempNodeBefore.setNext(tempNodeAfter);
+        tempNodeAfter.setPrev(tempNodeBefore);
+        tempNode.setNext(null);
+        tempNode.setPrev(null);
+        size -= 1;
+        i += size();
+      } else {
+        tempNode = tempNode.getNext();
+      }
+    }
+    return toString();
+  }
 }
