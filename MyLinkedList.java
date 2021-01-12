@@ -180,6 +180,18 @@ public class MyLinkedList{
   }
 
   public void extend (MyLinkedList a) {
+    if (a.size() == 0) {
+      return;
+    }
+    if (size() == 0) {
+      start = a.start;
+      end = a.start;
+      size += 1;
+      a.remove(0);
+      if (a.size() == 0) {
+        return;
+      }
+    }
     end.setNext(a.start);
     a.start.setPrev(end);
     size += a.size();
